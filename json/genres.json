@@ -1,0 +1,8 @@
+[
+  { "id": "1", "libelle": "Jeu de plateau" },
+  { "id": "2", "libelle": "Jeu de cartes" },
+  { "id": "3", "libelle": "Jeu de stratégie" },
+  { "id": "4", "libelle": "Coopératif" },
+  { "id": "5", "libelle": "Jeu de dé" },
+  { "id": "6", "libelle": "Jeu d'enquete" }
+]
