@@ -1,20 +1,23 @@
 package fr.eni.ludotheque.bo;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 import lombok.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 @Data
 @NoArgsConstructor
-@RequiredArgsConstructor
-@Entity
-@Table(name="GENRES")
+@AllArgsConstructor
+@Builder
+@Document(collection = "genres")
 public class Genre {
+
 	@Id
-	@NonNull
+	private String id;
+
+	@Field
 	private Integer noGenre;
 
-	@NonNull private String libelle;
-	
+	@Field
+	private String libelle;
 }

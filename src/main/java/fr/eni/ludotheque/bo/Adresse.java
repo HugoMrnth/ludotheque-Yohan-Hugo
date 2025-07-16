@@ -1,27 +1,25 @@
 package fr.eni.ludotheque.bo;
 
-import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 @Data
 @NoArgsConstructor
-@RequiredArgsConstructor
-@Entity
-@Table(name="ADRESSES")
+@AllArgsConstructor
+@Builder
+@Document(collection="adresses")
 public class Adresse {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@EqualsAndHashCode.Exclude
-	private Integer noAdresse;
+	private String id;
 	
-	@Column(length = 100, nullable = false)
-	@NonNull private String rue;
+	@Field
+	private String rue;
 	
-	@Column(length = 5, nullable = false)
-	@NonNull private String codePostal;
+	@Field
+	private String codePostal;
 	
-	@Column(length = 100, nullable = false)
-	@NonNull private String ville;
-
-
+	@Field
+	private String ville;
 }

@@ -1,35 +1,36 @@
 package fr.eni.ludotheque.bo;
 
-import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.DocumentReference;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 @Data
-@RequiredArgsConstructor
-@Entity
-@Table(name="FACTURES")
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Document(collection = "factures")
 public class Facture {
-	
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer noFacture;
-	
-	@Basic(optional = true)
+	private String id;
+
+	@Field
 	private LocalDateTime datePaiement;
-	
-	@OneToMany
-	@JoinColumn(name="no_facture")
-	private List<Location> locations=new ArrayList<Location>();
-	
-	
-	//@Transient // attribut calculable  
-	private float prix;
-	
+
+	@Field
+	@DocumentReference
+	@Builder.Default
+	private List<Location> locations = new ArrayList<>();
+
+	@Field
+	private Float prix;
+
 	public void addLocation(Location location) {
 		this.locations.add(location);
 	}

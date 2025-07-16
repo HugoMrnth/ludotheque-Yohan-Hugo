@@ -1,44 +1,31 @@
 package fr.eni.ludotheque.bo;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
 import lombok.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 @Data
+@AllArgsConstructor
 @NoArgsConstructor
-@RequiredArgsConstructor
-@Entity
-@Table(name="CLIENTS")
+@Builder
+@Document(collection = "clients")
 public class Client {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@EqualsAndHashCode.Exclude
-	private Integer noClient;
+	private String id;
 	
-	@Column(length = 50, nullable = false)
-	@NonNull private String nom;
+	@Field
+	private String nom;
 	
-	@Column(length = 50, nullable = false)
-	@NonNull private String prenom;
-	
-	@Column(length = 50, nullable = false, unique = true)
-	@NonNull private String email;
-	
-	@Column(length = 15, nullable = false)
+	@Field
+	private String prenom;
+
+	@Field
+	private String email;
+
+	@Field
 	private String noTelephone;
 
-	@NonNull
-	@OneToOne(cascade = CascadeType.ALL,
-			orphanRemoval = true, optional = false,
-			fetch = FetchType.EAGER)
-	@JoinColumn(name = "no_adresse")
+	@Field
 	private Adresse adresse;
 }

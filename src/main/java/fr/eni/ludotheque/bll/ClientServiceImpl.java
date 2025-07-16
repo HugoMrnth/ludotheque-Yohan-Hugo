@@ -52,10 +52,10 @@ public class ClientServiceImpl implements ClientService{
 
 	@Override
 	/* S2010 - Modification complète d'un client */
-	public Client modifierClient(Integer noClient, ClientDTO clientDto) {
+	public Client modifierClient(String id, ClientDTO clientDto) {
 		//Client client = clientRepository.findById(noClient).orElseThrow(()->new DataNotFound("Client", noClient));
 		Client client = new Client();
-		client.setNoClient(noClient);
+		client.setId(id);
 		client.setAdresse(new Adresse());
 		BeanUtils.copyProperties(clientDto, client);
 		BeanUtils.copyProperties(clientDto, client.getAdresse());
@@ -64,14 +64,14 @@ public class ClientServiceImpl implements ClientService{
 			clientBD = clientRepository.save(client);
 		} catch (OptimisticLockingFailureException e) {//thrown if entity is assumed to be present but does not exists in db
 			//e.printStackTrace();
-			throw new DataNotFound("Client", noClient);
+			throw new DataNotFound("Client", id);
 		}
 
 		return clientBD;
 	}
 
 	@Override
-	public Client trouverClientParId(Integer id)  {
+	public Client trouverClientParId(String id)  {
 
 		Optional<Client> optClient = clientRepository.findById(id);
 		if(optClient.isEmpty()) {
@@ -81,8 +81,8 @@ public class ClientServiceImpl implements ClientService{
 	}
 
 	@Override
-	public Client modifierAdresse(Integer noClient, AdresseDTO adresseDto) {
-		Client client = clientRepository.findById(noClient).orElseThrow(()->new DataNotFound("Client", noClient));
+	public Client modifierAdresse(String id, AdresseDTO adresseDto) {
+		Client client = clientRepository.findById(id).orElseThrow(()->new DataNotFound("Client", id));
 
 		BeanUtils.copyProperties(adresseDto, client.getAdresse());
 

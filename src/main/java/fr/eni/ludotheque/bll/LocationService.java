@@ -12,7 +12,7 @@ public interface LocationService {
 	
 	Facture retourExemplaires( List<String> codebarres);
 
-	Facture payerFacture( Integer noFacture);
+	Facture payerFacture( String noFacture);
 
 	void trouverLocationParExemplaireCodebarre(String codebarre);
 }
