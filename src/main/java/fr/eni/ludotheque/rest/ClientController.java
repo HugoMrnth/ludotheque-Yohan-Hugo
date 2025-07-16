@@ -30,4 +30,9 @@ public class ClientController {
         client.setAdresse(adresseRepository.save(client.getAdresse()));
         return clientRepository.save(client);
     }
+
+    @DeleteMapping("/{id}")
+    public void deleteClient(@PathVariable String id) {
+        clientRepository.deleteById(id);
+    }
 }
