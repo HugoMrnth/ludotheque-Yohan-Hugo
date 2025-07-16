@@ -21,3 +21,6 @@ logging:
           mongodb:
             core:
               MongoTemplate: DEBUG
+    fr:
+      eni:
+        ludotheque: DEBUG

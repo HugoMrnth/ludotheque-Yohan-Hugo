@@ -5,6 +5,7 @@ import fr.eni.ludotheque.bo.Client;
 import fr.eni.ludotheque.dal.AdresseRepository;
 import fr.eni.ludotheque.dal.ClientRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.java.Log;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +28,13 @@ public class ClientController {
 
     @PostMapping
     public Client addClient(@RequestBody Client client) {
+        client.setAdresse(adresseRepository.save(client.getAdresse()));
+        return clientRepository.save(client);
+    }
+
+    @PutMapping("/{id}")
+    public Client updateClient(@PathVariable String id, @RequestBody Client client) {
+        client.setId(id);
         client.setAdresse(adresseRepository.save(client.getAdresse()));
         return clientRepository.save(client);
     }
