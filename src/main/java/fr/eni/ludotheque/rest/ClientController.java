@@ -1,9 +1,11 @@
 package fr.eni.ludotheque.rest;
 
+import fr.eni.ludotheque.bll.ClientService;
 import fr.eni.ludotheque.bo.Adresse;
 import fr.eni.ludotheque.bo.Client;
 import fr.eni.ludotheque.dal.AdresseRepository;
 import fr.eni.ludotheque.dal.ClientRepository;
+import fr.eni.ludotheque.dto.ClientDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
 import lombok.extern.slf4j.Slf4j;
@@ -21,15 +23,24 @@ public class ClientController {
     private final ClientRepository clientRepository;
     private final AdresseRepository adresseRepository;
 
+    private final ClientService clientService;
+
     @GetMapping
     public List<Client> getAllClients() {
         return clientRepository.findAll();
     }
 
+    @GetMapping("/search")
+    public List<Client> searchClient(@RequestParam String nom) {
+        return clientService.trouverClientsParNom(nom);
+    }
+
     @PostMapping
-    public Client addClient(@RequestBody Client client) {
-        client.setAdresse(adresseRepository.save(client.getAdresse()));
-        return clientRepository.save(client);
+    public Client addClient(@RequestBody ClientDTO clientDTO) {
+//        client.setAdresse(adresseRepository.save(client.getAdresse()));
+//        return clientRepository.save(client);
+
+        return clientService.ajouterClient(clientDTO);
     }
 
     @PutMapping("/{id}")

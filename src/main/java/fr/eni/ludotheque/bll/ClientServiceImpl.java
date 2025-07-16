@@ -33,7 +33,7 @@ public class ClientServiceImpl implements ClientService{
 		Adresse adresse = new Adresse();
 		BeanUtils.copyProperties(clientDto, client);
 		BeanUtils.copyProperties(clientDto, adresse);
-		client.setAdresse(adresse);
+		client.setAdresse(adresseRepository.save(adresse));
 		Client newClient = null;
 		try {
 			newClient = clientRepository.save(client);
