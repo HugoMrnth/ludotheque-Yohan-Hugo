@@ -39,6 +39,13 @@ public class ClientController {
         return clientRepository.save(client);
     }
 
+    @PatchMapping("/{id}/adresse")
+    public Client updateClientAdresse(@PathVariable String id, @RequestBody Adresse adresse) {
+        Client client = clientRepository.findById(id).orElseThrow();
+        client.setAdresse(adresseRepository.save(adresse));
+        return clientRepository.save(client);
+    }
+
     @DeleteMapping("/{id}")
     public void deleteClient(@PathVariable String id) {
         clientRepository.deleteById(id);
