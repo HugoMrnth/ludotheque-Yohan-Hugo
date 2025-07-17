@@ -3,10 +3,7 @@ package fr.eni.ludotheque.rest;
 import fr.eni.ludotheque.bll.JeuService;
 import fr.eni.ludotheque.bo.Jeu;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,4 +18,6 @@ public class JeuController {
     public List<Jeu> findJeuxWithNbExemplaires(@RequestParam(name = "titre", required = false, defaultValue = "TOUS") String titre) {
         return jeuService.listeJeuxCatalogue(titre);
     }
+
+
 }
