@@ -26,6 +26,5 @@ public class Exemplaire {
 	private Boolean louable = true;
 
 	@Field
-	@DocumentReference
 	private Jeu jeu;
 }

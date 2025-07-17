@@ -24,7 +24,6 @@ public class Facture {
 	private LocalDateTime datePaiement;
 
 	@Field
-	@DocumentReference
 	@Builder.Default
 	private List<Location> locations = new ArrayList<>();
 

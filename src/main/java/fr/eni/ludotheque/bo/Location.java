@@ -28,10 +28,8 @@ public class Location {
 	private Float tarifJour;
 
 	@Field
-	@DocumentReference
 	private Client client;
 
 	@Field
-	@DocumentReference
 	private Exemplaire exemplaire;
 }
