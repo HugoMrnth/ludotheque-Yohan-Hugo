@@ -1,9 +1,6 @@
 package fr.eni.ludotheque.bll;
 
-import fr.eni.ludotheque.bo.Client;
-import fr.eni.ludotheque.bo.Exemplaire;
-import fr.eni.ludotheque.bo.Facture;
-import fr.eni.ludotheque.bo.Location;
+import fr.eni.ludotheque.bo.*;
 import fr.eni.ludotheque.dal.ExemplaireRepository;
 import fr.eni.ludotheque.dal.FactureRepository;
 import fr.eni.ludotheque.dal.JeuRepository;
@@ -35,15 +32,20 @@ public class LocationServiceImpl implements LocationService{
 
 	@Override
 	public Location ajouterLocation(LocationDTO locationDto  ) {
-		//Exemplaire exemplaire = exemplaireRepository.findByCodebarreWithJeu(locationDto.getCodebarre());
 		Exemplaire exemplaire = exemplaireRepository.findByCodebarre(locationDto.getCodebarre());
+
 		Client client = new Client();
 		client.setId(locationDto.getClientId());
 
 //		Location location = new Location(LocalDateTime.now(), client, exemplaire);
-        Location location = Location.builder().dateDebut(LocalDateTime.now()).client(client).exemplaire(exemplaire).build();
-		Float tarifJour = jeuRepository.findTarifJour(exemplaire.getJeu().getId());
-		location.setTarifJour(tarifJour);
+        Location location = Location.builder()
+				.dateDebut(LocalDateTime.now())
+				.client(client)
+				.exemplaire(exemplaire)
+				.build();
+
+//		Float tarifJour = jeuRepository.findTarifJour(exemplaire.getJeu().getId());
+		location.setTarifJour(jeuRepository.findById(exemplaire.getJeu().getId()).orElseThrow().getTarifJour());
 		Location newLoc = locationRepository.save(location);
 
 		return newLoc;
