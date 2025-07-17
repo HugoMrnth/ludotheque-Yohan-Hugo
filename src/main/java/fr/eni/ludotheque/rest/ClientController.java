@@ -30,6 +30,11 @@ public class ClientController {
         return clientRepository.findAll();
     }
 
+    @GetMapping("/{id}")
+    public Client getClientById(@PathVariable String id) {
+        return clientService.trouverClientParId(id);
+    }
+
     @GetMapping("/search")
     public List<Client> searchClient(@RequestParam String nom) {
         return clientService.trouverClientsParNom(nom);
@@ -37,9 +42,6 @@ public class ClientController {
 
     @PostMapping
     public Client addClient(@RequestBody ClientDTO clientDTO) {
-//        client.setAdresse(adresseRepository.save(client.getAdresse()));
-//        return clientRepository.save(client);
-
         return clientService.ajouterClient(clientDTO);
     }
 
