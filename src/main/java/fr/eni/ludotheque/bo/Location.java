@@ -1,16 +1,16 @@
 package fr.eni.ludotheque.bo;
 
+import com.mongodb.lang.Nullable;
 import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.DocumentReference;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.time.LocalDateTime;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
 @Document(collection = "locations")
 public class Location {
@@ -22,9 +22,11 @@ public class Location {
 	private LocalDateTime dateDebut;
 
 	@Field
+	@Nullable
 	private LocalDateTime dateRetour;
 
 	@Field
+	@Nullable
 	private Float tarifJour;
 
 	@Field

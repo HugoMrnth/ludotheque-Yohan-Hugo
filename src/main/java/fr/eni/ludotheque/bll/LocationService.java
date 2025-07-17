@@ -14,5 +14,7 @@ public interface LocationService {
 
 	Facture payerFacture( String noFacture);
 
-	void trouverLocationParExemplaireCodebarre(String codebarre);
+	Location trouverParCodebarre(String codebarre);
+
+
 }
