@@ -1,8 +1,10 @@
 package fr.eni.ludotheque.rest;
 
 import fr.eni.ludotheque.bll.ClientService;
+import fr.eni.ludotheque.bll.JeuService;
 import fr.eni.ludotheque.bo.Adresse;
 import fr.eni.ludotheque.bo.Client;
+import fr.eni.ludotheque.bo.Jeu;
 import fr.eni.ludotheque.dal.AdresseRepository;
 import fr.eni.ludotheque.dal.ClientRepository;
 import fr.eni.ludotheque.dto.ClientDTO;
@@ -24,6 +26,7 @@ public class ClientController {
     private final AdresseRepository adresseRepository;
 
     private final ClientService clientService;
+    private final JeuService jeuService;
 
     @GetMapping
     public List<Client> getAllClients() {

@@ -24,7 +24,6 @@ public class Jeu {
 	private String titre;
 
 	@Field
-	@Indexed(unique = true)
 	private String reference;
 
 	@Field
@@ -43,7 +42,6 @@ public class Jeu {
 	private Integer nbExemplairesDisponibles;
 
 	@Field
-	@DocumentReference
 	@Builder.Default
 	private List<Genre> genres = new ArrayList<>();
 
