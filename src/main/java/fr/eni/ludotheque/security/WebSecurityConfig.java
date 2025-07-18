@@ -22,16 +22,23 @@ public class WebSecurityConfig {
                 //.csrf(AbstractHttpConfigurer::disable)
                 // .csrf(withDefaults())
                 .authorizeHttpRequests((requests) -> requests
+                        // Accès PUBLIC
                         .requestMatchers(HttpMethod.GET,
                                 "/api/jeux",
                                 "/api/jeux/**",
                                 "/api/exemplaires/**"
                         ).permitAll()
+
+                        // Accès EMPLOYE
                         .requestMatchers( "/login").permitAll()
-                        .requestMatchers(HttpMethod.POST,
-                                "/api/clients",
-                                "/api/locations"
-                                ).hasAnyRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST,"/api/clients").hasAnyRole("EMPLOYE")
+                        .requestMatchers(HttpMethod.DELETE,"/api/clients/*").hasAnyRole("EMPLOYE")
+                        .requestMatchers(HttpMethod.PUT,"/api/clients/*").hasAnyRole("EMPLOYE")
+                        .requestMatchers(HttpMethod.PATCH,"/api/clients/*/adresse").hasAnyRole("EMPLOYE")
+                        .requestMatchers(HttpMethod.GET,"/api/clients/search").hasAnyRole("EMPLOYE")
+                        .requestMatchers(HttpMethod.GET,"/api/clients/*").hasAnyRole("EMPLOYE")
+
+                        // Authentifié : tout le reste
                         .anyRequest().authenticated()
                 )
                 .httpBasic(Customizer.withDefaults());
